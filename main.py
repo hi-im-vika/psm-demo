@@ -20,10 +20,11 @@ class PSMDemoApp:
             print(self.term.bold_cyan(label))
 
         for i, axis in enumerate("XYZ"):
-            with self.term.location(x - 4, y + 1 + i):
-                print(self.term.bold_white("{}: {: .2f}    {}: {: .2f}".format(
-                    axis, xyz[i], rpy_labels[i], rpy[i]
-                )))
+            line = "{}: {: .2f}    {}: {: .2f}".format(
+                axis, xyz[i], rpy_labels[i], rpy[i]
+            )
+            with self.term.location(x - len(line) // 2, y + 1 + i):
+                print(self.term.bold_white(line))
 
         with self.term.location(x - 9, y + 5):
             print("Press Ctrl+C to exit")
