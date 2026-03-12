@@ -1,10 +1,26 @@
 import pyspacemouse
 from textual.app import App, ComposeResult
 from textual.widgets import Static
+from textual.reactive import reactive
 from textual import work
 
 class PSMDisplay(Static):
-    pass
+    xyz = reactive([0.0, 0.0, 0.0])
+    rpy = reactive([0.0, 0.0, 0.0])
+
+    def render(self):
+        rpy_labels = ["R", "P", "Y"]
+        lines = []
+        for i, axis in enumerate("XYZ"):
+            lines.append(
+                f"[bold]{axis}[/bold]: {self.xyz[i]: .2f}    "
+                f"[bold]{rpy_labels[i]}[/bold]: {self.rpy[i]: .2f}"
+            )
+        return (
+            "[bold cyan]pyspacemouse state[/bold cyan]\n\n"
+            + "\n".join(lines)
+            + "\n\n[dim]Press Ctrl+C to exit[/dim]"
+        )
 
 class PSMDemoApp(App):
     BINDINGS = [
