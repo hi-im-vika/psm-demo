@@ -4,6 +4,7 @@ from blessed import Terminal
 class PSMDemoApp:
     def __init__(self):
         self.term = Terminal()
+        self.spacemouse = None
 
     def _draw(self):
         x = self.term.width // 2
