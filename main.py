@@ -9,6 +9,8 @@ class PSMDemoApp:
     def run(self):
         print("Hello from psm-demo!")
 
+    def cleanup(self):
+        self.spacemouse.close()
 
 if __name__ == "__main__":
     try:
