@@ -1,5 +1,8 @@
 import pyspacemouse
-from blessed import Terminal
+from textual.widgets import Static
+
+class PSMDisplay(Static):
+    pass
 
 class PSMDemoApp:
     def __init__(self):
