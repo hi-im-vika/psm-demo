@@ -25,9 +25,10 @@ class PSMDemoApp:
             )
             with self.term.location(x - len(line) // 2, y + 1 + i):
                 print(self.term.bold_white(line))
-
-        with self.term.location(x - 9, y + 5):
-            print("Press Ctrl+C to exit")
+                
+        hint = "Press Ctrl+C to exit"
+        with self.term.location(x - len(hint) // 2, y + 5):
+            print(hint)
 
     def run(self):
         print("Hello from psm-demo!")
