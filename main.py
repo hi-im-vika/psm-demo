@@ -1,10 +1,11 @@
 import pyspacemouse
+from textual.app import App
 from textual.widgets import Static
 
 class PSMDisplay(Static):
     pass
 
-class PSMDemoApp:
+class PSMDemoApp(App):
     def __init__(self):
         self.term = Terminal()
         self.spacemouse = None
