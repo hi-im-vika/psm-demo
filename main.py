@@ -35,7 +35,6 @@ class PSMDemoApp:
               self.term.hidden_cursor(), ):
             while True:
                 self._draw()
-        self.cleanup()
 
 if __name__ == "__main__":
     try:
