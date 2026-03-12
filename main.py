@@ -1,46 +1,37 @@
 import pyspacemouse
-from textual.app import App
+from textual.app import App, ComposeResult
 from textual.widgets import Static
+from textual import work
 
 class PSMDisplay(Static):
     pass
 
 class PSMDemoApp(App):
-    def __init__(self):
-        self.term = Terminal()
-        self.spacemouse = None
+    BINDINGS = [
+        ("ctrl+c", "quit", "Quit"),
+        ("ctrl+q", "noop", ""),
+    ]
 
-    def _draw(self):
-        x = self.term.width // 2
-        y = self.term.height // 2
+    def compose(self) -> ComposeResult:
+        yield PSMDisplay()
 
-        state = self.spacemouse.read()
-        xyz = [state.x, state.y, state.z]
-        rpy = [state.roll, state.pitch, state.yaw]
-        rpy_labels = ["R", "P", "Y"]
+    def action_noop(self) -> None:
+        pass
 
-        label = "pyspacemouse state"
-        with self.term.location(x - len(label) // 2, y - 1):
-            print(self.term.bold_cyan(label))
+    def on_mount(self) -> None:
+        self.spacemouse = pyspacemouse.open()
+        self.poll()
 
-        for i, axis in enumerate("XYZ"):
-            line = "{}: {: .2f}    {}: {: .2f}".format(
-                axis, xyz[i], rpy_labels[i], rpy[i]
-            )
-            with self.term.location(x - len(line) // 2, y + 1 + i):
-                print(self.term.bold_white(line))
-                
-        hint = "Press Ctrl+C to exit"
-        with self.term.location(x - len(hint) // 2, y + 5):
-            print(hint)
+    @work(thread=True)
+    def poll(self) -> None:
+        display = self.query_one(PSMDisplay)
+        while True:
+            state = self.spacemouse.read()
+            display.xyz = [state.x, state.y, state.z]
+            display.rpy = [state.roll, state.pitch, state.yaw]
 
-    def run(self):
-        print("Hello from psm-demo!")
-        with (pyspacemouse.open() as self.spacemouse,
-              self.term.fullscreen(), 
-              self.term.hidden_cursor()):
-            while True:
-                self._draw()
+    def on_unmount(self) -> None:
+        pass
 
 if __name__ == "__main__":
     try:
