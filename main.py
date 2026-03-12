@@ -47,7 +47,7 @@ class PSMDemoApp(App):
             display.rpy = [state.roll, state.pitch, state.yaw]
 
     def on_unmount(self) -> None:
-        pass
+        self.spacemouse.close()
 
 if __name__ == "__main__":
     try:
