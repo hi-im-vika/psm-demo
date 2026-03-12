@@ -26,9 +26,9 @@ class PSMDemoApp:
 
     def run(self):
         print("Hello from psm-demo!")
-        with (self.term.fullscreen(), 
-              self.term.hidden_cursor(), 
-              pyspacemouse.open() as self.spacemouse):
+        with (pyspacemouse.open() as self.spacemouse,
+              self.term.fullscreen(), 
+              self.term.hidden_cursor(), ):
             while True:
                 self._draw()
         self.cleanup()
