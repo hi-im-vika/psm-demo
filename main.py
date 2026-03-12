@@ -10,6 +10,7 @@ class PSMDemoApp:
         print("Hello from psm-demo!")
 
     def cleanup(self):
+        print("Cleaning up...")
         try:
             self.spacemouse.close()
         except:
