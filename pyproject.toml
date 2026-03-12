@@ -5,6 +5,6 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "blessed>=1.33.0",
     "pyspacemouse>=2.0.0",
+    "textual>=8.1.1",
 ]
