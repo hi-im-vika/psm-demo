@@ -33,7 +33,7 @@ class PSMDemoApp:
         print("Hello from psm-demo!")
         with (pyspacemouse.open() as self.spacemouse,
               self.term.fullscreen(), 
-              self.term.hidden_cursor(), ):
+              self.term.hidden_cursor()):
             while True:
                 self._draw()
 
