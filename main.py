@@ -1,3 +1,4 @@
+import time
 import pyspacemouse
 from blessed import Terminal
 
@@ -8,14 +9,11 @@ class PSMDemoApp:
 
     def run(self):
         print("Hello from psm-demo!")
+        with pyspacemouse.open() as spacemouse:
+            while True:
+                print("pyspacemouse")
+                time.sleep(1)
         self.cleanup()
-
-    def cleanup(self):
-        print("Cleaning up...")
-        try:
-            self.spacemouse.close()
-        except:
-            print("Error closing spacemouse. Is it connected?")
 
 if __name__ == "__main__":
     try:
