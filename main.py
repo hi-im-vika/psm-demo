@@ -9,7 +9,9 @@ class PSMDemoApp:
 
     def run(self):
         print("Hello from psm-demo!")
-        with pyspacemouse.open() as spacemouse:
+        with (self.term.fullscreen(), 
+              self.term.hidden_cursor(), 
+              pyspacemouse.open() as self.spacemouse):
             while True:
                 print("pyspacemouse")
                 time.sleep(1)
