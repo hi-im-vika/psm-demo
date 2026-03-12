@@ -12,6 +12,8 @@ class PSMDemoApp:
 
         state = self.spacemouse.read()
         xyz = [state.x, state.y, state.z]
+        rpy = [state.roll, state.pitch, state.yaw]
+        rpy_labels = ["R", "P", "Y"]
 
         label = "pyspacemouse state"
         with self.term.location(x - len(label) // 2, y - 1):
