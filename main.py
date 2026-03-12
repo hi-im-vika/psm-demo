@@ -16,19 +16,31 @@ class PSMDemoApp:
         rpy_labels = ["R", "P", "Y"]
 
         label = "pyspacemouse state"
-        with self.term.location(x - len(label) // 2, y - 1):
-            print(self.term.bold_cyan(label))
 
+        lines = []
         for i, axis in enumerate("XYZ"):
-            line = "{}: {: .2f}    {}: {: .2f}".format(
+            lines.append("{}: {: .2f}    {}: {: .2f}".format(
                 axis, xyz[i], rpy_labels[i], rpy[i]
-            )
-            with self.term.location(x - len(line) // 2, y + 1 + i):
-                print(self.term.bold_white(line))
-                
-        hint = "Press Ctrl+C to exit"
-        with self.term.location(x - len(hint) // 2, y + 5):
-            print(hint)
+            ))
+
+        inner_width = max(len(label), max(len(l) for l in lines))
+        box_x = x - (inner_width + 2) // 2
+
+        with self.term.location(box_x, y - 1):
+            print("┌" + "─" * (inner_width + 2) + "┐")
+
+        with self.term.location(box_x, y):
+            print("│ " + self.term.bold_cyan(label.center(inner_width)) + " │")
+
+        with self.term.location(box_x, y + 1):
+            print("├" + "─" * (inner_width + 2) + "┤")
+
+        for i, line in enumerate(lines):
+            with self.term.location(box_x, y + 2 + i):
+                print("│ " + self.term.bold_white(line.center(inner_width)) + " │")
+
+        with self.term.location(box_x, y + 2 + len(lines)):
+            print("└" + "─" * (inner_width + 2) + "┘")
 
     def run(self):
         print("Hello from psm-demo!")
