@@ -3,7 +3,8 @@ from blessed import Terminal
 
 class PSMDemoApp:
     def __init__(self):
-        pass
+        self.term = Terminal()
+        self.spacemouse = pyspacemouse.open()
 
     def run(self):
         print("Hello from psm-demo!")
