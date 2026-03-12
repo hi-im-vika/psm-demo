@@ -10,7 +10,10 @@ class PSMDemoApp:
         print("Hello from psm-demo!")
 
     def cleanup(self):
-        self.spacemouse.close()
+        try:
+            self.spacemouse.close()
+        except:
+            print("Error closing spacemouse. Is it connected?")
 
 if __name__ == "__main__":
     try:
