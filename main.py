@@ -1,4 +1,3 @@
-import time
 import pyspacemouse
 from blessed import Terminal
 
