@@ -8,6 +8,7 @@ class PSMDemoApp:
 
     def run(self):
         print("Hello from psm-demo!")
+        self.cleanup()
 
     def cleanup(self):
         print("Cleaning up...")
